@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_todo_app/controller/services.dart';
-import 'package:flutter_project_todo_app/models/task_model.dart';
 
+// ignore: must_be_immutable
 class CustomTile extends StatefulWidget {
   String taskTitle;
   String taskDescription;
@@ -66,6 +65,10 @@ class _CustomTileState extends State<CustomTile> {
                       onChanged: (bool? value) {
                         setState(() {
                           isChecked = value!;
+                          // for(int i in taskListnotifier.value){
+                          //   completedTasksNotifier.value.add(isChecked);
+                          // }
+
                           print(isChecked);
                         });
                       }),

@@ -11,26 +11,27 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(TaskModelAdapter().typeId)) {
     Hive.registerAdapter(TaskModelAdapter());
   }
-  
+
   await Hive.openBox<TaskModel>('mybox');
   await Hive.openBox('theme_settings');
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: themebox.listenable(),
-      builder:(context, box, child) {
-        final isDark=box.get('isDark',defaultValue: false);
+      builder: (context, box, child) {
+        final isDark = box.get('isDark', defaultValue: false);
         return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: isDark ? CustomAppTheme.appTheme[AppTheme.darkTheme] : CustomAppTheme.appTheme[AppTheme.lightTheme],
-        home: MyHomePage(),
-      );
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: isDark
+              ? CustomAppTheme.appTheme[AppTheme.darkTheme]
+              : CustomAppTheme.appTheme[AppTheme.lightTheme],
+          home: MyHomePage(),
+        );
       },
     );
   }
