@@ -20,7 +20,8 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       title: fields[0] as String,
       description: fields[1] as String,
       dateTime: fields[3] as DateTime,
-    )..isCompleted = fields[2] as bool?;
+      isCompleted: fields[2] as bool,
+    );
   }
 
   @override

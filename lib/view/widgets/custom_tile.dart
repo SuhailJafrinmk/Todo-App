@@ -1,33 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_todo_app/controller/services.dart';
+import 'package:flutter_project_todo_app/models/task_model.dart';
 
 // ignore: must_be_immutable
 class CustomTile extends StatefulWidget {
-  String taskTitle;
-  String taskDescription;
-  DateTime dateTime;
+  int index;
   VoidCallback fordeletion;
+  final bool removeicon;
+  TaskModel data;
+
   CustomTile(
-      {required this.taskTitle,
-      required this.taskDescription,
+      {super.key,
+      required this.index,
+      required this.data,
       required this.fordeletion,
-      required this.dateTime});
+      required this.removeicon});
 
   @override
   State<CustomTile> createState() => _CustomTileState();
 }
 
 class _CustomTileState extends State<CustomTile> {
-  bool isChecked = false;
-  bool borderEnabled=false;
+  bool borderEnabled = false; //variable for setting border on tapped of card
   @override
   Widget build(BuildContext context) {
-    print('custom tile i rebuilded');
+    // print('custom tile i rebuilded');
     return Padding(
       padding: const EdgeInsets.all(15),
       child: InkWell(
         onTap: () {
           setState(() {
-            borderEnabled=!borderEnabled;
+            borderEnabled = !borderEnabled;
           });
         },
         child: Card(
@@ -44,8 +47,8 @@ class _CustomTileState extends State<CustomTile> {
                     SizedBox(
                         width: 300,
                         child: Text(
-                          'Task:${widget.taskTitle}',
-                          style: TextStyle(
+                          'Task:${widget.data.title}',
+                          style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.w500),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -53,38 +56,38 @@ class _CustomTileState extends State<CustomTile> {
                     SizedBox(
                         width: 300,
                         child: Text(
-                          "Description:${widget.taskDescription}",
+                          "Description:${widget.data.description}",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         )),
                     SizedBox(
                         width: 300,
                         child: Text(
-                          "Date:${widget.dateTime.toString()}",
+                          "Date:${widget.data.dateTime.toString()}",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         )),
                   ],
                 ),
-                Column(
-                  children: <Widget>[
-                    Checkbox(
-                        value: isChecked,
-                        activeColor: Colors.black,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            isChecked = value!;
-                            // for(int i in taskListnotifier.value){
-                            //   completedTasksNotifier.value.add(isChecked);
-                            // }
-        
-                            print(isChecked);
-                          });
-                        }),
-                    IconButton.filled(
-                        onPressed: widget.fordeletion, icon: Icon(Icons.delete)),
-                  ],
-                ),
+                widget.removeicon == true
+                    ? Column(
+                        children: <Widget>[
+                          Checkbox(
+                            value: widget.data.isCompleted,
+                            activeColor: Colors.black,
+                            onChanged: (value) {
+                              // print(widget.index);
+                              setState(() {
+                                upatedcheckbox(widget.data, widget.index);
+                              });
+                            },
+                          ),
+                          IconButton.filled(
+                              onPressed: widget.fordeletion,
+                              icon: const Icon(Icons.delete)),
+                        ],
+                      )
+                    : const SizedBox(),
               ],
             ),
           ),
