@@ -14,10 +14,12 @@ Future<void> main() async {
 
   await Hive.openBox<TaskModel>('mybox');
   await Hive.openBox('theme_settings');
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
           theme: isDark
               ? CustomAppTheme.appTheme[AppTheme.darkTheme]
               : CustomAppTheme.appTheme[AppTheme.lightTheme],
-          home: MyHomePage(),
+          home: const MyHomePage(),
         );
       },
     );

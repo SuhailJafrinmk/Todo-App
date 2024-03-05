@@ -9,25 +9,27 @@ class CompletedTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ValueListenableBuilder(
+    return ValueListenableBuilder(
         valueListenable: taskListnotifier,
         builder: (context, List<TaskModel> listOfTask, Widget? child) {
           // print('valuelisstenable builder is being rebuilded');
-          return  ListView.builder(
+          return ListView.builder(
               itemCount: listOfTask.length,
               itemBuilder: (BuildContext context, index) {
                 final data = listOfTask[index];
-              
-                return
-                data.isCompleted==true? CustomTile(removeicon: false,
-                index: index,
-                  data: data,
-                  fordeletion: () {
-                    deleteFromDb(index);
-                    taskBox = Hive.box('mybox');
-                    taskListnotifier.value = taskBox.values.toList();
-                  },
-                ):Container();
+
+                return data.isCompleted == true
+                    ? CustomTile(
+                        removeicon: false,
+                        index: index,
+                        data: data,
+                        fordeletion: () {
+                          deleteFromDb(index);
+                          taskBox = Hive.box('mybox');
+                          taskListnotifier.value = taskBox.values.toList();
+                        },
+                      )
+                    : Container();
               });
         });
   }
