@@ -22,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int itemindex = 0;
   @override
   Widget build(BuildContext context) {
+    final theme=themebox.get('isDark');
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -77,10 +78,23 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       appBar: AppBar(
         toolbarHeight: 80,
-        title: Text('TaskTrackr',style: GoogleFonts.roboto(
-          fontSize: 25,
-          fontWeight: FontWeight.w500,
-        ),),
+        title: RichText(text: TextSpan(
+          children: <TextSpan>[TextSpan(text: 'Task',
+          style: GoogleFonts.montserrat(
+            fontSize: 18,
+            color: theme==false ? Colors.black : Colors.white
+          )
+          ),
+          TextSpan(text: 'Tracker',style: GoogleFonts.poppins(
+            fontSize: 23,
+            color:theme==false ? Colors.black : Colors.white
+          ))
+          ]
+        )),
+        // title: Text('TaskTrackr',style: GoogleFonts.roboto(
+        //   fontSize: 25,
+        //   fontWeight: FontWeight.w500,
+        // ),),
         actions: [
           IconButton(
               onPressed: () {

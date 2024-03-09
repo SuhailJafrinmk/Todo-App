@@ -51,7 +51,7 @@ class AboutPage extends StatelessWidget {
                   color: Colors.black
                 )
                 ),
-                TextSpan(text: ' Suhail Jafrin',style: GoogleFonts.robotoSerif(color: Colors.teal)),
+                TextSpan(text: ' Suhail Jafrin',style: GoogleFonts.robotoSerif(color: Colors.teal,fontSize: 20)),
               ]
             )),
             const SizedBox(height: 10),
