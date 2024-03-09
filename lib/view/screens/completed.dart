@@ -12,7 +12,7 @@ class CompletedTasks extends StatelessWidget {
     return ValueListenableBuilder(
         valueListenable: taskListnotifier,
         builder: (context, List<TaskModel> listOfTask, Widget? child) {
-          // print('valuelisstenable builder is being rebuilded');
+          print('valuelisstenable builder is being rebuilded');
           return ListView.builder(
               itemCount: listOfTask.length,
               itemBuilder: (BuildContext context, index) {
@@ -31,6 +31,8 @@ class CompletedTasks extends StatelessWidget {
                       )
                     : Container();
               });
-        });
+          
+        }
+        );
   }
 }

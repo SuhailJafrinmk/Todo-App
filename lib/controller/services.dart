@@ -6,8 +6,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 late Box<TaskModel> taskBox; //box for storing taskmodel objects
 Box themebox = Hive.box('theme_settings'); //box for storing theme
-ValueNotifier<List<TaskModel>> taskListnotifier =
-    ValueNotifier([]); //notifier for adding data to database
+ValueNotifier<List<TaskModel>> taskListnotifier =ValueNotifier([]); //notifier for adding data to database
+TextEditingController taskTitleController = TextEditingController();
+TextEditingController taskDescriptionController = TextEditingController();
 
 //function to add data to database
 void addDataToDb(taskItems) async {
@@ -39,20 +40,30 @@ Future<void> upatedcheckbox(TaskModel value, int index) async {
   await taskBox.putAt(index, value);
 }
 
+//function to update the tile
+Future<void> updatedtile(TaskModel data, int index) async {
+  taskBox = Hive.box('mybox');
+  await taskBox.putAt(index, data);
+  getAllTasks();
+}
+
+
 //function to show bottom modal sheet----------------------------------
 Future<dynamic> showmodal(context) {
   TextEditingController taskTitleController = TextEditingController();
   TextEditingController taskDescriptionController = TextEditingController();
-
   return showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(10),
-          child: Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
-              child: Form(
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: Column(
                   children: [
                     const SizedBox(
@@ -89,8 +100,69 @@ Future<dynamic> showmodal(context) {
                         },
                         buttonText: 'Add'),
                   ],
-                ),
-              )),
+                )),
+          ),
+        );
+      });
+}
+
+
+
+
+//bottom sheet for udating the values in the tile---------------------------
+Future<dynamic> showModalUpdateSheet(
+    context, TaskModel datashared, int index1) {
+  TextEditingController taskTitleController = TextEditingController();
+  TextEditingController taskDescriptionController = TextEditingController();
+  taskDescriptionController.text = datashared.description;
+  taskTitleController.text = datashared.title;
+  return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                        controller: taskTitleController,
+                        hintText: 'Title of Task',
+                        icon: const Icon(Icons.title)),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                        controller: taskDescriptionController,
+                        hintText: 'Task Description',
+                        icon: const Icon(Icons.description)),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    CustomButton(
+                        onPressed: () {
+                          if (taskTitleController.text.isNotEmpty ||
+                              taskDescriptionController.text.isNotEmpty) {
+                            TaskModel taskItems = TaskModel(
+                                title: taskTitleController.text,
+                                description: taskDescriptionController.text,
+                                dateTime: DateTime.now());
+                            updatedtile(taskItems, index1);
+                            Navigator.pop(context);
+                          }
+                        },
+                        buttonText: 'update'),
+                  ],
+                )),
+          ),
         );
       });
 }

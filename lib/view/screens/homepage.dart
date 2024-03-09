@@ -17,14 +17,19 @@ class HomePage extends StatelessWidget {
               itemBuilder: (BuildContext context, index) {
                 final data = listOfTask[index];
 
-                return CustomTile(removeicon: true,
-                index: index,
-                  data: data,
-                  fordeletion: () {
-                    deleteFromDb(index);
-                    taskBox = Hive.box('mybox');
-                    taskListnotifier.value = taskBox.values.toList();
-                  }, 
+                return InkWell(
+                  onTap: () {
+                  showModalUpdateSheet(context,data,index);
+                  },
+                  child: CustomTile(removeicon: true,
+                  index: index,
+                    data: data,
+                    fordeletion: () {
+                      deleteFromDb(index);
+                      taskBox = Hive.box('mybox');
+                      taskListnotifier.value = taskBox.values.toList();
+                    }, 
+                  ),
                 );
               });
         });

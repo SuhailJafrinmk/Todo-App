@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_todo_app/controller/router.dart';
 import 'package:flutter_project_todo_app/controller/services.dart';
 import 'package:flutter_project_todo_app/view/screens/completed.dart';
 import 'package:flutter_project_todo_app/view/screens/homepage.dart';
 import 'package:flutter_project_todo_app/view/screens/pending.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -21,8 +23,64 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: const EdgeInsets.only(top: 50),
+          children: [
+            const DrawerHeader(child:Icon(Icons.account_circle,size: 100,),
+             ),
+             const ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('User details'),
+             ),
+             ListTile(
+              leading: const Icon(Icons.add_circle_rounded),
+              title: const Text('Add new task'),
+              onTap: () {
+                showmodal(context);
+              },
+             ),
+             ListTile(
+              leading: const Icon(Icons.done),
+              title: const Text('Completed Tasks'),
+              onTap: (){
+                CustomRouter.router.navigateTo(context, 'completedpage');
+              },
+             ),
+             ListTile(
+              leading: const Icon(Icons.pending),
+              title: const Text('Pending Tasks'),
+              onTap: (){
+                CustomRouter.router.navigateTo(context, 'pendingpage');
+              },
+             ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: (){
+                CustomRouter.router.navigateTo(context,'settingsPage');
+              }
+            ),
+             ListTile(
+              leading: const Icon(Icons.details_rounded),
+              title: const Text('About'),
+              onTap: (){
+                CustomRouter.router.navigateTo(context, 'aboutpage');
+
+              }
+            ),
+            const ListTile(
+
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        title: const Text('TODO APP'),
+        toolbarHeight: 80,
+        title: Text('TaskTrackr',style: GoogleFonts.roboto(
+          fontSize: 25,
+          fontWeight: FontWeight.w500,
+        ),),
         actions: [
           IconButton(
               onPressed: () {
@@ -33,7 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       : themebox.put('isDark', false);
                 });
               },
-              icon: const Icon(Icons.light)),
+              icon: const Icon(Icons.light,),style:IconButton.styleFrom(
+                backgroundColor: Colors.transparent
+              ) ,),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

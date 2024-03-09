@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_todo_app/controller/router.dart';
 import 'package:flutter_project_todo_app/controller/services.dart';
 import 'package:flutter_project_todo_app/models/task_model.dart';
 import 'package:flutter_project_todo_app/view/screens/my_home_page.dart';
@@ -12,8 +13,9 @@ Future<void> main() async {
     Hive.registerAdapter(TaskModelAdapter());
   }
 
-  await Hive.openBox<TaskModel>('mybox');
-  await Hive.openBox('theme_settings');
+  await Hive.openBox<TaskModel>('mybox'); //box for storing taskmodel objects
+  await Hive.openBox('theme_settings'); //box for storing theme settings
+  CustomRouter.setupRouter();  //setup for fluro router
   runApp(const MyApp());
 }
 
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
       builder: (context, box, child) {
         final isDark = box.get('isDark', defaultValue: false);
         return MaterialApp(
+          onGenerateRoute: CustomRouter.router.generator,
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: isDark
