@@ -15,7 +15,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> pages = [
-    HomePage(),
+     HomePage(),
     const CompletedTasks(),
     const PendingTasks(),
   ];
@@ -77,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       appBar: AppBar(
+        
         toolbarHeight: 80,
         title: RichText(text: TextSpan(
           children: <TextSpan>[TextSpan(text: 'Task',
@@ -91,10 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ))
           ]
         )),
-        // title: Text('TaskTrackr',style: GoogleFonts.roboto(
-        //   fontSize: 25,
-        //   fontWeight: FontWeight.w500,
-        // ),),
+
         actions: [
           IconButton(
               onPressed: () {

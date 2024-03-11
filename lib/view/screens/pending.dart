@@ -12,7 +12,6 @@ class PendingTasks extends StatelessWidget {
     return ValueListenableBuilder(
         valueListenable: taskListnotifier,
         builder: (context, List<TaskModel> listOfTask, Widget? child) {
-          // print('valuelisstenable builder is being rebuilded');
           return ListView.builder(
               itemCount: listOfTask.length,
               itemBuilder: (BuildContext context, index) {

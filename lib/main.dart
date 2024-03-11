@@ -9,10 +9,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  if (!Hive.isAdapterRegistered(TaskModelAdapter().typeId)) {
-    Hive.registerAdapter(TaskModelAdapter());
+  if (!Hive.isAdapterRegistered(TaskModelAdapter().typeId)) {  //registering the type adapter for the type taskmodel
+    Hive.registerAdapter(TaskModelAdapter()); 
   }
-
   await Hive.openBox<TaskModel>('mybox'); //box for storing taskmodel objects
   await Hive.openBox('theme_settings'); //box for storing theme settings
   CustomRouter.setupRouter();  //setup for fluro router

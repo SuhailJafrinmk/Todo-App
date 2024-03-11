@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
               itemCount: listOfTask.length,
               itemBuilder: (BuildContext context, index) {
                 final data = listOfTask[index];
-
                 return InkWell(
                   onTap: () {
                   showModalUpdateSheet(context,data,index);

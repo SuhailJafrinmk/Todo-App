@@ -4,6 +4,7 @@ import 'package:flutter_project_todo_app/view/screens/completed.dart';
 import 'package:flutter_project_todo_app/view/screens/pending.dart';
 import 'package:flutter_project_todo_app/view/screens/settings_page.dart';
 
+//class for routing using fluro package
 class CustomRouter {
   static final router = FluroRouter();
 
