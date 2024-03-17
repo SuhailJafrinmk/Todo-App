@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
         builder: (context, List<TaskModel> listOfTask, Widget? child) {
           // print('valuelisstenable builder is being rebuilded');
           return ListView.builder(
+            reverse: true,
               itemCount: listOfTask.length,
               itemBuilder: (BuildContext context, index) {
                 final data = listOfTask[index];

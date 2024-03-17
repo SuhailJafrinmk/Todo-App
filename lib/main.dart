@@ -13,7 +13,7 @@ Future<void> main() async {
     Hive.registerAdapter(TaskModelAdapter()); 
   }
   await Hive.openBox<TaskModel>('mybox'); //box for storing taskmodel objects
-  await Hive.openBox('theme_settings'); //box for storing theme settings
+  await Hive.openBox('theme_settings'); //box for storing theme settings boolean value 
   CustomRouter.setupRouter();  //setup for fluro router
   runApp(const MyApp());
 }

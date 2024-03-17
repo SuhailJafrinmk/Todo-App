@@ -6,7 +6,7 @@ enum AppTheme { darkTheme, lightTheme }
 class CustomAppTheme {
   static final appTheme = {
     AppTheme.darkTheme: ThemeData(
-      drawerTheme: DrawerThemeData(
+      drawerTheme: const DrawerThemeData(
         backgroundColor: Colors.grey,
       ),
       cardTheme: const CardTheme(
@@ -86,7 +86,7 @@ class CustomAppTheme {
       scaffoldBackgroundColor: Colors.yellow.shade200,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.yellow.shade500,
-        titleTextStyle: TextStyle(
+        titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 25,
         ),
@@ -102,12 +102,12 @@ class CustomAppTheme {
         bodyText2: TextStyle(color: Colors.black),
       ),
 
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         unselectedIconTheme: IconThemeData(
           color: Colors.black,
         ),
         selectedIconTheme: IconThemeData(
-          color: const Color.fromARGB(255, 22, 60, 91),
+          color: Color.fromARGB(255, 22, 60, 91),
         ),
         elevation: 20,
         backgroundColor: Color.fromARGB(255, 230, 217, 102),

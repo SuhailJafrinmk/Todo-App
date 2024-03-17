@@ -12,7 +12,7 @@ class TaskModel {
   @HiveField(2)
   bool isCompleted;
   @HiveField(3)
-  DateTime dateTime;
+  String dateTime;
 
   TaskModel(
       {required this.title,

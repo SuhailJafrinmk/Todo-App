@@ -3,6 +3,7 @@ import 'package:flutter_project_todo_app/models/task_model.dart';
 import 'package:flutter_project_todo_app/view/widgets/custom_button.dart';
 import 'package:flutter_project_todo_app/view/widgets/custom_textfield.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 
 late Box<TaskModel> taskBox; //box for storing taskmodel objects
 Box themebox = Hive.box('theme_settings'); //box for storing theme
@@ -93,7 +94,8 @@ Future<dynamic> showmodal(context) {
                             TaskModel taskItems = TaskModel(
                                 title: taskTitle,
                                 description: taskDescription,
-                                dateTime: DateTime.now());
+                                dateTime: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+                                );
                             addDataToDb(taskItems);
                             Navigator.pop(context);
                           }
@@ -154,7 +156,8 @@ Future<dynamic> showModalUpdateSheet(
                             TaskModel taskItems = TaskModel(
                                 title: taskTitleController.text,
                                 description: taskDescriptionController.text,
-                                dateTime: DateTime.now());
+                                dateTime: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+                                );
                             updatedtile(taskItems, index1);
                             Navigator.pop(context);
                           }
