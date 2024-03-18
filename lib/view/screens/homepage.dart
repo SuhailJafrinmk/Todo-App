@@ -11,12 +11,12 @@ class HomePage extends StatelessWidget {
     return ValueListenableBuilder(
         valueListenable: taskListnotifier,
         builder: (context, List<TaskModel> listOfTask, Widget? child) {
-          // print('valuelisstenable builder is being rebuilded');
           return ListView.builder(
-            reverse: true,
+            padding: EdgeInsets.only(bottom: 60),
               itemCount: listOfTask.length,
               itemBuilder: (BuildContext context, index) {
-                final data = listOfTask[index];
+                final reversedIndex=listOfTask.length-index-1;
+                final data = listOfTask[reversedIndex];
                 return InkWell(
                   onTap: () {
                   showModalUpdateSheet(context,data,index);
